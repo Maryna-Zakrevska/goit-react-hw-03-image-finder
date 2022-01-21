@@ -2,7 +2,7 @@
   "name": "react-homework-template",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://luxplanjay.github.io/react-homework-template",
+  "homepage": "https://Maryna-Zakrevska.github.io/goit-react-hw-03-image-finder",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
@@ -35,5 +35,12 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint": "^8.7.0",
+    "nanoid": "^3.2.0",
+    "prettier": "^2.5.1",
+    "prop-types": "^15.8.1",
+    "styled-components": "^5.3.3"
   }
 }
