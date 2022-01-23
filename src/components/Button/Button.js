@@ -1,5 +1,14 @@
-import React from 'react';
+import { PropTypes } from "prop-types";
+import React from "react";
+export const Button = ({ type = "button", onLoadMoreImages, hasNextPage, ...props }) => {
+  if (hasNextPage) {
+    return <button type={type} onClick={onLoadMoreImages} {...props} />;
+  }
+  return null;
+};
 
-export const Button = ({ type = 'button', loadMoreImages, ...props }) => (
-    <button type={type} onClick={loadMoreImages} {...props} />
-  );
+Button.propTypes = {
+  type: PropTypes.string,
+  hasNextPage: PropTypes.bool,
+  onLoadMoreImages: PropTypes.func.isRequired,
+};

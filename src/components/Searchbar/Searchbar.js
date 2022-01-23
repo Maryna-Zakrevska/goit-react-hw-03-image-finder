@@ -1,51 +1,55 @@
-import PropTypes from "prop-types";
-import React, { Component } from "react";
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import { toast } from 'react-toastify';
+import { FaSearch } from 'react-icons/fa';
 
 export class Searchbar extends Component {
   static propTypes = {
-    onSubmit: PropTypes.func.isRequired,
+    onSubmit: PropTypes.func,
   };
   state = {
-    query: "",
+    searchQuery: '',
   };
-
-  inputQueryChange = (e) => {
-    this.setState({ query: e.currentTarget.value.toLowerCase() });
+  inputQueryChange = e => {
+    this.setState({ searchQuery: e.target.value.toLowerCase() });
   };
-
-  formSubmit = (e) => {
+  formSubmit = e => {
     e.preventDefault();
-    const formQuery = this.state.query.trim();
-    if (formQuery === "") {
-      toast.error("Заполните поле поиска");
+    const formQuery = this.state.searchQuery.trim();
+    if (formQuery === '') {
+      toast.error('Заполните поле поиска');
       return;
     }
     this.props.onSubmit(formQuery);
-    this.setState({ query: "" });
+    this.setState({ searchQuery: '' });
   };
-
   render() {
+    const { searchQuery } = this.state;
     return (
       <div>
-        <header className="searchbar">
-          <form className="form" onSubmit={this.formSubmit}>
-            <button type="submit" className="button">
-              <span className="button-label">Search</span>
+        <header>
+          <form onSubmit={this.formSubmit}>
+            <label>
+              <input
+                name="searchQuery"
+                value={searchQuery}
+                onChange={this.inputQueryChange}
+                type="text"
+                autoComplete="off"
+                autoFocus
+                placeholder="Search images and photos"
+              />
+            </label>
+            <button
+              type="submit"
+              disabled={this.props.status === 'pending'}
+            >
+              <FaSearch/>
+              <span>Search</span>
             </button>
-
-            <input
-              className="input"
-              type="text"
-              autoComplete="off"
-              autoFocus
-              onChange={this.inputQueryChange}
-              placeholder="Search images and photos"
-            />
           </form>
         </header>
       </div>
     );
   }
 }
-

@@ -1,18 +1,24 @@
-import React from "react";
-import { ImageGalleryItem } from "components/ImageGalleryItem/ImageGalleryItem";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { ImageGalleryItem } from 'components/ImageGalleryItem/ImageGalleryItem';
 
-export const ImageGallery = ({ images = [{}], openModal }) => {
+export const ImageGallery = ({ images = [{}], onOpenModal }) => {
   return (
-    <div>
-      <ul className="gallery" >
+    <ul>
       {images.map(image => (
         <ImageGalleryItem
-        key={image.id}
-        image={image}
-        openModal={openModal}
-      />
+          key={image.id}
+          image={image}
+          onOpenModal={onOpenModal}
+        />
       ))}
-      </ul>
-    </div>
+    </ul>
   );
 };
+
+ImageGallery.propTypes = {
+  images: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
+  onOpenModal: PropTypes.func.isRequired,
+};
+
+
