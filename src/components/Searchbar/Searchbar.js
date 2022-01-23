@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { toast } from 'react-toastify';
 import { FaSearch } from 'react-icons/fa';
+import {SearchbarStyled, SearchFormStyled, SearchFormButtonStyled, SearchFormButtonSpanStyled, SearchFormInputStyled, SearchFormButtonLabelStyled} from "./Searchbar.styled";
 
 export class Searchbar extends Component {
   static propTypes = {
@@ -26,11 +27,10 @@ export class Searchbar extends Component {
   render() {
     const { searchQuery } = this.state;
     return (
-      <div>
-        <header>
-          <form onSubmit={this.formSubmit}>
-            <label>
-              <input
+        <SearchbarStyled >
+          <SearchFormStyled onSubmit={this.formSubmit}>
+            <SearchFormButtonLabelStyled>
+              <SearchFormInputStyled
                 name="searchQuery"
                 value={searchQuery}
                 onChange={this.inputQueryChange}
@@ -39,17 +39,16 @@ export class Searchbar extends Component {
                 autoFocus
                 placeholder="Search images and photos"
               />
-            </label>
-            <button
+            </SearchFormButtonLabelStyled>
+            <SearchFormButtonStyled
               type="submit"
               disabled={this.props.status === 'pending'}
             >
               <FaSearch/>
-              <span>Search</span>
-            </button>
-          </form>
-        </header>
-      </div>
+              <SearchFormButtonSpanStyled>Search</SearchFormButtonSpanStyled>
+            </SearchFormButtonStyled>
+          </SearchFormStyled>
+        </SearchbarStyled>
     );
   }
 }

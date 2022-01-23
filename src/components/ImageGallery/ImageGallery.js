@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ImageGalleryItem } from 'components/ImageGalleryItem/ImageGalleryItem';
+import {ImageGalleryStyled} from "./ImageGallery.styled";
 
 export const ImageGallery = ({ images = [{}], onOpenModal }) => {
   return (
-    <ul>
+    <ImageGalleryStyled>
       {images.map(image => (
         <ImageGalleryItem
           key={image.id}
@@ -12,7 +13,7 @@ export const ImageGallery = ({ images = [{}], onOpenModal }) => {
           onOpenModal={onOpenModal}
         />
       ))}
-    </ul>
+    </ImageGalleryStyled>
   );
 };
 

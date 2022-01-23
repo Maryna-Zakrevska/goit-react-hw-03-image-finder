@@ -1,12 +1,13 @@
 import React, { Component } from "react";
-import { Searchbar } from "./Searchbar/Searchbar";
 import { getImages } from "servises/api";
+import { Searchbar } from "./Searchbar/Searchbar";
 import { ImageGallery } from "./ImageGallery/ImageGallery";
-import { ToastContainer } from "react-toastify";
 import { Button } from "./Button/Button";
 import { Loader } from "./Loader/Loader";
 import { Modal } from "./Modal/Modal";
+import { ToastContainer } from "react-toastify";
 import { AiOutlineClose } from 'react-icons/ai';
+import {ModalImgStyled, AppDivStyled} from "./App.styled";
 import "react-toastify/dist/ReactToastify.css";
 
 const Status = {
@@ -78,25 +79,12 @@ export class App extends Component {
     });
   };
 
-  openModal = (showModal) => {
+  openModal = showModal => {
     this.setState({ showModal });
-    window.addEventListener("keydown", this.onEscCloseModal);
-  };
+   };
 
-  onEscCloseModal = ({ code }) => {
-    if (code === "Escape") {
-      this.setState({ showModal: {} });
-    }
-  };
-
-  closeModal = (e) => {
-    if (e.currentTarget === e.target) {
-      this.setState({ showModal: {} });
-    }
-  };
-
-  closeModalBtn = () => {
-    this.setState({ showModal: {} });
+  toggleModal = () => {
+    this.setState(({ showModal }) => ({ showModal: !showModal }));
   };
 
   render() {
@@ -104,33 +92,33 @@ export class App extends Component {
 
     if (status === Status.IDLE) {
       return (
-        <div>
+        <AppDivStyled>
           <Searchbar onSubmit={this.searchQuerySubmit} />
           <ToastContainer autoClose={2500} />
-        </div>
+        </AppDivStyled>
       );
     }
     if (status === Status.PENDING) {
       const nextPage = page > 1;
       return (
-        <div>
+        <AppDivStyled>
           <Searchbar />
           {nextPage && (
               <ImageGallery images={images} />
           )}
           <Loader />
           <ToastContainer autoClose={2500} />
-        </div>
+        </AppDivStyled>
       );
     }
 
     if (status === Status.REJECTED) {
       return (
-        <div>
+        <AppDivStyled>
           <Searchbar onSubmit={this.searchQuerySubmit} />
           <p>No results for {searchQuery}</p>
           <ToastContainer autoClose={2500} />
-        </div>
+        </AppDivStyled>
       );
     }
 
@@ -139,7 +127,7 @@ export class App extends Component {
       const hasNextPage = totalHits > page * perPage;
       const needToOpenModal = showModal && Object.keys(showModal).length > 0;
       return (
-        <div>
+        <AppDivStyled>
           <Searchbar onSubmit={this.searchQuerySubmit} />
           {!notEmptyImagesArray && (
             <p>
@@ -163,12 +151,13 @@ export class App extends Component {
                   >
                     <AiOutlineClose/>
                   </button>
-                  <img src={showModal.largeImageURL} alt={showModal.alt} />
+                  <ModalImgStyled src={showModal.largeImageURL} alt={showModal.alt} />
                 </Modal>
               )}
+              <ToastContainer autoClose={2500} />
             </>
           )}
-        </div>
+        </AppDivStyled>
       );
     } 
   }

@@ -1,5 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { ImageGalleryItemStyled,ImageGalleryItemImageStyled } from "./ImageGalleryItem.styled"
+
 export const ImageGalleryItem = ({
   image: {
     webformatURL,
@@ -14,15 +16,15 @@ export const ImageGalleryItem = ({
 }) => {
   const alt = tags && Object.values(tags).join(", ");
   return (
-    <li>
-      <img
+    <ImageGalleryItemStyled>
+      <ImageGalleryItemImageStyled
         src={webformatURL}
         alt={alt}
         onClick={() => onOpenModal({ largeImageURL, alt, imageWidth, imageHeight })}
         width={webformatWidth}
         height={webformatHeight}
       />
-    </li>
+    </ImageGalleryItemStyled>
   );
 };
 
