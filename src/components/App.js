@@ -6,8 +6,8 @@ import { Button } from "./Button/Button";
 import { Loader } from "./Loader/Loader";
 import { Modal } from "./Modal/Modal";
 import { ToastContainer } from "react-toastify";
-import { AiOutlineClose } from 'react-icons/ai';
-import {ModalImgStyled, AppDivStyled} from "./App.styled";
+import { AiOutlineClose } from "react-icons/ai";
+import { ModalImgStyled, AppDivStyled, CloseButtonStyled,NoResultsMessageStyled } from "./App.styled";
 import "react-toastify/dist/ReactToastify.css";
 
 const Status = {
@@ -31,7 +31,6 @@ export class App extends Component {
     totalHits: null,
   };
 
-  
   componentDidUpdate(_, prevState) {
     const prevQuery = prevState.searchQuery;
     const nextQuery = this.state.searchQuery;
@@ -79,9 +78,9 @@ export class App extends Component {
     });
   };
 
-  openModal = showModal => {
+  openModal = (showModal) => {
     this.setState({ showModal });
-   };
+  };
 
   toggleModal = () => {
     this.setState(({ showModal }) => ({ showModal: !showModal }));
@@ -103,9 +102,7 @@ export class App extends Component {
       return (
         <AppDivStyled>
           <Searchbar />
-          {nextPage && (
-              <ImageGallery images={images} />
-          )}
+          {nextPage && <ImageGallery images={images} />}
           <Loader />
           <ToastContainer autoClose={2500} />
         </AppDivStyled>
@@ -116,7 +113,7 @@ export class App extends Component {
       return (
         <AppDivStyled>
           <Searchbar onSubmit={this.searchQuerySubmit} />
-          <p>No results for {searchQuery}</p>
+          <NoResultsMessageStyled>No results for {searchQuery}. Please type correct search query</NoResultsMessageStyled>
           <ToastContainer autoClose={2500} />
         </AppDivStyled>
       );
@@ -130,27 +127,21 @@ export class App extends Component {
         <AppDivStyled>
           <Searchbar onSubmit={this.searchQuerySubmit} />
           {!notEmptyImagesArray && (
-            <p>
-              No results for <b>"{searchQuery}"</b>.
-            </p>
+            <NoResultsMessageStyled>
+              No results for <b>"{searchQuery}"</b>. Please type correct search query
+            </NoResultsMessageStyled>
           )}
           {notEmptyImagesArray && (
             <>
               <ImageGallery images={images} onOpenModal={this.openModal} />
-              <Button
-                hasNextPage={hasNextPage}
-                onLoadMoreImages={this.loadMoreImages}
-              >
+              <Button hasNextPage={hasNextPage} onLoadMoreImages={this.loadMoreImages}>
                 Load More
               </Button>
               {needToOpenModal && (
                 <Modal onClose={this.toggleModal}>
-                  <button
-                    type="button"
-                    onClick={this.toggleModal}
-                  >
-                    <AiOutlineClose/>
-                  </button>
+                  <CloseButtonStyled type="button" onClick={this.toggleModal}>
+                    <AiOutlineClose />
+                  </CloseButtonStyled>
                   <ModalImgStyled src={showModal.largeImageURL} alt={showModal.alt} />
                 </Modal>
               )}
@@ -159,6 +150,6 @@ export class App extends Component {
           )}
         </AppDivStyled>
       );
-    } 
+    }
   }
 }

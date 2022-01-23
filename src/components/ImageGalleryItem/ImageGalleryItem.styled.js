@@ -7,7 +7,7 @@ const ImageGalleryItemStyled = styled.li`
 `;
 
 const ImageGalleryItemImageStyled = styled.img`
-display: block;
+  display: block;
   width: 100%;
   height: 260px;
   object-fit: cover;
@@ -18,4 +18,4 @@ display: block;
   }
 `;
 
-export { ImageGalleryItemStyled,ImageGalleryItemImageStyled };
+export { ImageGalleryItemStyled, ImageGalleryItemImageStyled };

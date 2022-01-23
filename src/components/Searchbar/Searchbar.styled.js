@@ -74,7 +74,7 @@ const SearchFormInputStyled = styled.input`
   font-size: 20px;
   border: none;
   outline: none;
-  padding-left: 4px;
+  padding-left: 16px;
   padding-right: 4px;
 
   ::placeholder {
