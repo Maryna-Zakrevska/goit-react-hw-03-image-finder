@@ -17,7 +17,7 @@ const Status = {
   REJECTED: "rejected",
 };
 
-const firstPage = 1;
+/* const firstPage = 1; */
 
 export class App extends Component {
   state = {
@@ -42,7 +42,7 @@ export class App extends Component {
     if (prevQuery !== nextQuery) {
       this.setState({ page: 1, status: Status.PENDING });
 
-      getImages(nextQuery, firstPage)
+      getImages(nextQuery, nextPage)
         .then(({ hits, totalHits }) =>
           this.setState({ images: hits, totalHits: totalHits, status: Status.RESOLVED }),
         )
@@ -68,7 +68,7 @@ export class App extends Component {
   searchQuerySubmit = (inputQuery) => {
     const prevQuery = this.state.searchQuery;
     if (prevQuery !== inputQuery) {
-      this.setState({ searchQuery: inputQuery });
+      this.setState({ searchQuery: inputQuery, page: 1 });
     }
   };
 
@@ -113,7 +113,7 @@ export class App extends Component {
       return (
         <AppDivStyled>
           <Searchbar onSubmit={this.searchQuerySubmit} />
-          <NoResultsMessageStyled>No results for {searchQuery}. Please type correct search query</NoResultsMessageStyled>
+          <NoResultsMessageStyled>No results for <b>"{searchQuery}"</b>. Please type correct search query</NoResultsMessageStyled>
           <ToastContainer autoClose={2500} />
         </AppDivStyled>
       );
