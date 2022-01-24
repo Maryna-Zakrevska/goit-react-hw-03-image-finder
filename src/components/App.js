@@ -7,7 +7,12 @@ import { Loader } from "./Loader/Loader";
 import { Modal } from "./Modal/Modal";
 import { ToastContainer } from "react-toastify";
 import { AiOutlineClose } from "react-icons/ai";
-import { ModalImgStyled, AppDivStyled, CloseButtonStyled,NoResultsMessageStyled } from "./App.styled";
+import {
+  ModalImgStyled,
+  AppDivStyled,
+  CloseButtonStyled,
+  NoResultsMessageStyled,
+} from "./App.styled";
 import "react-toastify/dist/ReactToastify.css";
 
 const Status = {
@@ -16,8 +21,6 @@ const Status = {
   RESOLVED: "resolved",
   REJECTED: "rejected",
 };
-
-/* const firstPage = 1; */
 
 export class App extends Component {
   state = {
@@ -113,7 +116,9 @@ export class App extends Component {
       return (
         <AppDivStyled>
           <Searchbar onSubmit={this.searchQuerySubmit} />
-          <NoResultsMessageStyled>No results for <b>"{searchQuery}"</b>. Please type correct search query</NoResultsMessageStyled>
+          <NoResultsMessageStyled>
+            No results for <b>"{searchQuery}"</b>. Please type correct search query
+          </NoResultsMessageStyled>
           <ToastContainer autoClose={2500} />
         </AppDivStyled>
       );
